@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Twitter infinite scroll disabler",
-  "description": "Disables Twitter's automatic infinite scrolling and replaces it with a \"show more\" button.",
+  "name": "Twitter Infinite Scroll Disabler",
+  "description": "Disable Twitter's automatic infinite scrolling and replace it with a \"show more\" button.",
   "version": "1.0",
   "content_scripts": [
     {
