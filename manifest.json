@@ -3,7 +3,7 @@
 
   "name": "Twitter Infinite Scroll Disabler",
   "description": "Disable Twitter's automatic infinite scrolling and replace it with a \"show more\" button.",
-  "version": "1.0",
+  "version": "1.1",
   "content_scripts": [
     {
       "matches": ["*://twitter.com/*"],

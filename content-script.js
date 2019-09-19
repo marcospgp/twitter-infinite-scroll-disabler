@@ -1,8 +1,5 @@
 "use strict";
 
-let feedHeight = 2500;
-const showMoreIncrement = 2500;
-
 const getContainer = () => new Promise((resolve) => {
     const x = $('section[aria-labelledby]');
 
@@ -16,18 +13,13 @@ const getContainer = () => new Promise((resolve) => {
     resolve(y);
 });
 
-console.log("I'm alive!");
-
 const showMore = (container, button) => {
     feedHeight += showMoreIncrement;
     container.css("max-height", `${feedHeight}px`);
     button.css("top", `${feedHeight}px`);
-}
+};
 
-const container = getContainer().then(container => {
-    console.log("Got container:");
-    console.log(container);
-
+const manipulateContainer = (container) => {
     container.css({
         "max-height": `${feedHeight}px`,
         overflow: "hidden",
@@ -54,4 +46,28 @@ const container = getContainer().then(container => {
     }
 
     button.click(() => showMore(container, button));
-});
+};
+
+const isAlreadyManipulated = (container) => {
+    const button = $("#tisd-show-more");
+    return !!button.length;
+};
+
+const isCurrentPageFeed = () => {
+    return window.location.href.includes("home");
+};
+
+const run = () => getContainer()
+    .then(container => {
+        if (isCurrentPageFeed() && !isAlreadyManipulated(container)) {
+            manipulateContainer(container);
+        }
+        // Keep running in case user leaves feed but returns later and we have
+        // to reinsert the show more button
+        setTimeout(run, 500);
+    });
+
+let feedHeight = 2500;
+const showMoreIncrement = 2500;
+
+run();
